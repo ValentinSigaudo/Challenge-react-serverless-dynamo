@@ -4,10 +4,10 @@ Aplicacion de usuarios, donde los usuarios podran guardar editar y eliminar cont
 
 ## Que se puede hacer con la aplicacion?
 
--La aplicacion cuenta con registro de usuarios, el cual se hace con Email y contraseña
--Luego de registrarte te envia un codigo a tu correo para verificar la cuente
--Una vez registrado y verificado, puedes ir a iniciar sesion
--luego de iniciar sesion, puedes ver tu lista de contactos, cargar nuevos, editar los existentes y eliminarlos
+- La aplicacion cuenta con registro de usuarios, el cual se hace con Email y contraseña
+- Luego de registrarte te envia un codigo a tu correo para verificar la cuente
+- Una vez registrado y verificado, puedes ir a iniciar sesion
+- Luego de iniciar sesion, puedes ver tu lista de contactos, cargar nuevos, editar los existentes y eliminarlos
 
 ## Tecnologias usadas en el Frontend:
 
@@ -40,14 +40,14 @@ Aplicacion de usuarios, donde los usuarios podran guardar editar y eliminar cont
 
 ## Tecnologias usadas en el Backend:
 
--Serverless Framewor que permite definir y desplegar infraestructura y configuracion como código.
--AWS Lambda, Funciones que ejecutan la lógica de negocio en respuesta a eventos HTTP.
--API Gateway (HTTP API) genera los endpoints HTTP públicos para interactuar con las funciones Lambda.
--Amazon DynamoDB Base de datos NoSQL para almacenar las tablas de contactos.
-  -disclaimer: originalmente habia pensado otra estructura, la cual llevaba un tabla users para obtener datos
+- Serverless Framewor que permite definir y desplegar infraestructura y configuracion como código.
+- AWS Lambda, Funciones que ejecutan la lógica de negocio en respuesta a eventos HTTP.
+- API Gateway (HTTP API) genera los endpoints HTTP públicos para interactuar con las funciones Lambda.
+- Amazon DynamoDB Base de datos NoSQL para almacenar las tablas de contactos.
+  - disclaimer: originalmente habia pensado otra estructura, la cual llevaba un tabla users para obtener datos
   luego, al usar cognito, esa tabla quedo obsoleta, aun asi la deje con sus 2 metodos creados, por que a futuro 
   puede ser util para agregar funcionalidades
--Amazon S3, almacena un archivo zip donde esta empaquetado el codigo y configuraciones
+- Amazon S3, almacena un archivo zip donde esta empaquetado el codigo y configuraciones
 
 ## Dependencias utilizadas en el Backend:
 
