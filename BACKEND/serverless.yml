@@ -1,0 +1,116 @@
+org: valentin1005
+app: aws-serverless
+service: AWS-Dynamodb
+
+plugins:
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1
+  deploymentBucket:
+    name: valentin-app-challenge
+  httpApi:
+    name: api-valentin-sigaudo
+    cors:
+      allowedOrigins:
+        - http://localhost:5173
+      allowedMethods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - OPTIONS
+      allowedHeaders:
+        - Content-Type
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:Query
+      Resource:
+        - ${env:USER_TABLE_ARN}
+        - ${env:CONTACT_TABLE_ARN}
+        - ${env:CONTACT_INDEX_ARN}
+
+functions:
+  hello:
+    handler: src/handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
+  createUser:
+    handler: src/user/createUser.createUser
+    events:
+      - httpApi:
+          path: /user
+          method: post
+  getUser:
+    handler: src/user/getUser.getUser
+    events:
+      - httpApi:
+          path: /user/{id}
+          method: get
+  createContact:
+    handler: src/contact/createContact.createContact
+    events:
+      - httpApi:
+          path: /contacts
+          method: post
+  getContactsByUser:
+    handler: src/contact/getContactsByUser.getContactsByUser
+    events:
+      - httpApi:
+          path: /contacts/user/{userId}
+          method: get
+  updateContact:
+    handler: src/contact/updateContact.updateContact
+    events:
+      - httpApi:
+          path: /contacts/{id}
+          method: put
+  deleteContact:
+    handler: src/contact/deleteContact.deleteContact
+    events:
+      - httpApi:
+          path: /contacts/{id}
+          method: delete
+
+resources:
+  Resources:
+    UserTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: user
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+    ContactTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: contact
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: user_id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: user_id-index
+            KeySchema:
+              - AttributeName: user_id
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
