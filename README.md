@@ -44,6 +44,9 @@ Aplicacion de usuarios, donde los usuarios podran guardar editar y eliminar cont
 -AWS Lambda, Funciones que ejecutan la lógica de negocio en respuesta a eventos HTTP.
 -API Gateway (HTTP API) genera los endpoints HTTP públicos para interactuar con las funciones Lambda.
 -Amazon DynamoDB Base de datos NoSQL para almacenar las tablas de contactos.
+  -disclaimer: originalmente habia pensado otra estructura, la cual llevaba un tabla users para obtener datos
+  luego, al usar cognito, esa tabla quedo obsoleta, aun asi la deje con sus 2 metodos creados, por que a futuro 
+  puede ser util para agregar funcionalidades
 -Amazon S3, almacena un archivo zip donde esta empaquetado el codigo y configuraciones
 
 ## Dependencias utilizadas en el Backend:
